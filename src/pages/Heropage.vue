@@ -21,7 +21,7 @@
     const route = useRoute()
     let characterStore = useCharactersStore()
     let episodeStore = useEpisodesStore()
-    characterStore.fetchCharacter(parseInt(route.params.id)).then(
+    characterStore.fetchCharacter(parseInt(route.params.id as string)).then(
         (character) => episodeStore.fetchEpisodesByIds(
             character?.episode.map(
                 (characterEpisode) => parseInt(characterEpisode.replace(/.*?([0-9]+)$/gm, '$1'))
