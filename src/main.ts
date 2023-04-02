@@ -18,7 +18,7 @@ export default viteSSR(
     if (import.meta.env.SSR == false) {
       const isDark = useDark();
       const toggleDark = useToggle(isDark);
-      toggleDark(window.localStorage.getItem('darkMode') == 0);
+      toggleDark(window.localStorage.getItem('darkMode') == '0');
     }
 
     return { head }
