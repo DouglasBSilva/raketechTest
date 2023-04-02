@@ -5,14 +5,17 @@
                 <div class="col-span-1 h-full flex CardImageContainer rounded-l-lg">
                     <CardImage :image="character.image"/>
                 </div>
-                <div class="col-span-2 gap-4 grid content-center CardInfoContainer">
-                    <CardInfoTitle :title="character.name">
-                        <template #subtitle>
-
-                        </template>
+                <div class="col-span-2 gap-4 px-2 py-3 grid content-center CardInfoContainer">
+                    <CardInfoTitle :title="character.name" 
+                    @click="$emit('nameClick', character)"
+                    :specie="character.species"
+                    :status="character.status">
                     </CardInfoTitle>
-                    <CardInfo label="Last known location:" :info="character.location.name" :id="character.id"></CardInfo>
-                    <CardInfo label="First seen in:" :info="character.origin.name" :id="character.id"></CardInfo>
+                    <CardInfo 
+                        @click="$emit('lastLocationClick', character)" 
+                        label="Last known location:" 
+                        :info="character.location.name"></CardInfo>
+                    <CardInfo @click="$emit('firstSeenClick', character)" label="First seen in:" :info="character.origin.name"></CardInfo>
                 </div>
             </div>
         </CardContainer>
@@ -24,14 +27,14 @@
  import CardInfo from '$components/molecules/CardInfo.vue'
  import CardImage from '$components/molecules/CardImage.vue';
  import CardContainer from '$components/molecules/CardContainer.vue';
- import { Character } from 'rickmortyapi/dist/interfaces';
-
+ import { Character } from 'rickmortyapi';
+ 
  interface CharacterCardProps {
     character: Character
  }
 
  const {character} = defineProps<CharacterCardProps>()
-
+ defineEmits(['nameClick', 'firstSeemClick', 'lastLocationClick'])
 </script>
 
 <style scoped>

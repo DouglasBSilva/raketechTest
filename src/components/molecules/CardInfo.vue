@@ -1,10 +1,12 @@
 <template>
-    <div>
+    <div class="text-black dark:text-white">
         <div class="label opacity-50">
             {{ label }}
         </div>
         <div class="info">
-            {{ info }}
+            <a class="cursor-pointer hover:underline decoration-solid" @click="$emit( 'click' )">
+                {{ info }}
+            </a>
         </div>
     </div>
 </template>
@@ -13,8 +15,8 @@
     export interface CardInfoProps {
         label: string
         info: string
-        id: number
     }
     
-    const { label, info, id } = defineProps<CardInfoProps>();
+    const { label, info } = defineProps<CardInfoProps>();
+    defineEmits(['click'])
 </script>
