@@ -16,10 +16,12 @@
     
     import { useCharactersStore } from '$store/characters';
     import { useEpisodesStore } from '$store/episodes';
-    
+    import { useRoute } from 'vue-router'
+
+    const route = useRoute()
     let characterStore = useCharactersStore()
     let episodeStore = useEpisodesStore()
-    characterStore.fetchCharacter(1).then(
+    characterStore.fetchCharacter(parseInt(route.params.id)).then(
         (character) => episodeStore.fetchEpisodesByIds(
             character?.episode.map(
                 (characterEpisode) => parseInt(characterEpisode.replace(/.*?([0-9]+)$/gm, '$1'))
